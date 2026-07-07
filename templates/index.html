@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="/">🏠 خانه</a>
+    <a href="/gallery">🖼️ گالری</a>
+    <a href="/about">ℹ️ درباره</a>
+    <a href="/contact">📞 تماس</a>
+    <a href="/settings">⚙️ تنظیمات</a>
+</nav>
+
+<div class="container">
+
+    <h1>🎨 AI Image Generator</h1>
+
+    <p class="sub">متن خود را وارد کنید و تصویر بسازید.</p>
+
+    <form action="/generate" method="POST" id="generateForm">
+
+        <textarea
+            name="prompt"
+            placeholder="مثلاً: یک عقاب در حال پرواز بر فراز کوهستان"
+            rows="4"
+            required></textarea>
+
+        <br><br>
+
+        <button id="generateBtn" type="submit">
+            ✨ تولید تصویر
+        </button>
+
+    </form>
+
+    {% if image_url %}
+    <div class="result">
+
+        <h2>🖼️ تصویر تولید شده</h2>
+
+        <img src="{{ image_url }}" alt="Generated Image">
+
+        <br><br>
+
+        <a href="{{ image_url }}" target="_blank">
+            <button type="button">📥 دانلود تصویر</button>
+        </a>
+
+        <p><strong>پرامپت:</strong> {{ prompt }}</p>
+
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+const form = document.getElementById("generateForm");
+const btn = document.getElementById("generateBtn");
+
+form.addEventListener("submit", function () {
+    btn.disabled = true;
+    btn.innerHTML = "⏳ در حال تولید تصویر...";
+});
+</script>
+
+</body>
+</html>

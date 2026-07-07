@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گالری تصاویر</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="/">🏠 خانه</a>
+    <a href="/gallery">🖼️ گالری</a>
+    <a href="/about">ℹ️ درباره</a>
+    <a href="/contact">📞 تماس</a>
+    <a href="/settings">⚙️ تنظیمات</a>
+</nav>
+
+<div class="container">
+
+    <h1>🖼️ گالری تصاویر</h1>
+
+    {% if images %}
+
+        {% for item in images %}
+
+        <div class="result">
+
+            <img src="{{ item.image }}" alt="Image">
+
+            <p><strong>پرامپت:</strong> {{ item.prompt }}</p>
+
+            <a href="{{ item.image }}" target="_blank">
+                <button>📥 دانلود</button>
+            </a>
+
+        </div>
+
+        <hr style="margin:30px 0;">
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>هنوز هیچ تصویری تولید نشده است.</p>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
