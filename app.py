@@ -20,9 +20,10 @@ def generate():
     conn = get_db()
     cursor = conn.cursor()
 
+    # موقتاً همه تصاویر به کاربر شماره 1 تعلق می‌گیرند
     cursor.execute(
-        "INSERT INTO images (prompt, image_url) VALUES (?, ?)",
-        (prompt, image_url)
+        "INSERT INTO images (user_id, prompt, image_url) VALUES (?, ?, ?)",
+        (1, prompt, image_url)
     )
 
     conn.commit()
@@ -33,6 +34,7 @@ def generate():
         image_url=image_url,
         prompt=prompt
     )
+
 @app.route("/gallery")
 def gallery():
     conn = get_db()
